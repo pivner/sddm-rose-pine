@@ -74,8 +74,9 @@ Pane {
             id: formBackground
             anchors.fill: form
             anchors.centerIn: form
-            color: "#444"
-            opacity: config.PartialBlur == "true" ? 0.3 : 1
+            color: config.FormBackgroundColor
+            opacity: config.PartialBlur == "true" ? 0.95 : 1
+            visible: screenModel.primary == 0 ? true : false
             z: 1
         }
 
@@ -83,11 +84,13 @@ Pane {
             id: form
 
             height: virtualKeyboard.state == "visible" ? parent.height - virtualKeyboard.implicitHeight : parent.height
-            width: parent.width / 2.5
+            // width: 650
+            width: 500
             anchors.horizontalCenter: config.FormPosition == "center" ? parent.horizontalCenter : undefined
             anchors.left: config.FormPosition == "left" ? parent.left : undefined
             anchors.right: config.FormPosition == "right" ? parent.right : undefined
             virtualKeyboardActive: virtualKeyboard.state == "visible" ? true : false
+            visible: screenModel.primary == 0 ? true : false
             z: 1
         }
 
