@@ -34,17 +34,19 @@ You can create a custom package and install it via environment.systemPackages.
 ```nix
 # sddm-rose-pine.nix
 
-{ stdenv, fetchFromGitHub }:
+{ stdenvNoCC
+, fetchFromGitHub
+, libsForQt5
+}:
 
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "sddm-rose-pine-theme";
   version = "1.2";
   dontBuild = true;
 
-  installPhase = ''
-    mkdir -p $out/share/sddm/themes
-    cp -aR $src $out/share/sddm/themes/rose-pine
-  '';
+  propagatedUserEnvPkgs = [
+    libsForQt5.qt5.qtgraphicaleffects
+  ];
 
   src = fetchFromGitHub {
     owner = "lwndhrst";
@@ -52,6 +54,11 @@ stdenv.mkDerivation rec {
     rev = "v${version}";
     sha256 = "+WOdazvkzpOKcoayk36VLq/6lLOHDWkDykDsy8p87JE=";
   };
+
+  installPhase = ''
+    mkdir -p $out/share/sddm/themes
+    cp -aR $src $out/share/sddm/themes/rose-pine
+  '';
 }
 ```
 
@@ -64,9 +71,6 @@ stdenv.mkDerivation rec {
   # ...
 
   environment.systemPackages = with pkgs; [
-    # Needed for SDDM theme
-    libsForQt5.qt5.qtgraphicaleffects
-
     # Install the derivation
     (callPackage ./sddm-rose-pine.nix {})
   ];
