@@ -50,7 +50,7 @@ stdenv.mkDerivation rec {
     owner = "lwndhrst";
     repo = "sddm-rose-pine";
     rev = "v${version}";
-    sha256 = "HMKBU8/elF4ahpO/xWRIozD3dAnpz52+eFDS3YNDJyw=";
+    sha256 = "+WOdazvkzpOKcoayk36VLq/6lLOHDWkDykDsy8p87JE=";
   };
 }
 ```
