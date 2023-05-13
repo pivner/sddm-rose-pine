@@ -38,7 +38,7 @@ You can create a custom package and install it via environment.systemPackages.
 
 stdenv.mkDerivation rec {
   pname = "sddm-rose-pine-theme";
-  version = "1.1";
+  version = "1.2";
   dontBuild = true;
 
   installPhase = ''
